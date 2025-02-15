@@ -7,18 +7,27 @@ using namespace std;
 
 enum GameStates
 {
-	MAIN_MENU,
 	GAME_STOPPED,
+	GAME_START,
 	GAME_RUNNING
 };
 
-class Game : public sf::RenderWindow, public sf::Clock
+class Game
 {
 	public:
 		Game();
 
-		GameStates getGameState();
-		void startPong();
+		GameStates GetGameState() { return gameState; };
+
+		sf::RenderWindow window;
+		sf::Clock clock;
+
+		// Paddles:
+		sf::RectangleShape playerPaddle;
+		sf::RectangleShape compPaddle;
+
+		// Ball:
+		sf::CircleShape ball;
 
 	private:
 		// states:

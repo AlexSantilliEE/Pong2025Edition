@@ -12,7 +12,7 @@ Game::Game()
 	this->screenSizeY = 600;
 	this->title = "PONG: 2025 Edition";
 	this->settings.antialiasingLevel = 8;
-	create( sf::VideoMode( this->screenSizeX, this->screenSizeY ), this->title, sf::Style::Default, this->settings );
+	this->window.create( sf::VideoMode( this->screenSizeX, this->screenSizeY ), this->title, sf::Style::Default, this->settings );
 	
 	cout << "Loading Font...\n";
 	if ( !this->font.loadFromFile( "cour.ttf" ) )
@@ -20,10 +20,13 @@ Game::Game()
 		cout << "Error loading font" << endl;
 	}
 
-	return;
-}
+	this->playerPaddle.setSize( sf::Vector2f( 50.0f, 10.0f ) );
+	this->compPaddle.setSize( sf::Vector2f( 50.0f, 10.0f ) );
+	this->playerPaddle.setPosition( sf::Vector2f( ( this->screenSizeX / 2 ) - 25.0f, this->screenSizeY - 10.0f ) );
+	this->compPaddle.setPosition( sf::Vector2f( ( this->screenSizeX / 2 ) - 25.0f, 0.0f ) );
+	
+	this->ball.setRadius( 10.0f );
+	this->ball.setPosition( sf::Vector2f( ( this->screenSizeX / 2 ), ( this->screenSizeY / 2 ) ) );
 
-GameStates Game::getGameState() 
-{
-	return this->gameState;
+	return;
 }
