@@ -12,22 +12,46 @@ enum GameStates
 	GAME_RUNNING
 };
 
+class Paddle : public sf::RectangleShape
+{
+	public: 
+
+		Paddle() : speed( 0.15f ) {};
+		
+		float speed;
+
+};
+
+class Ball : public sf::CircleShape
+{
+public:
+
+	Ball() : speed( 0.05f ), theta( 0.0f ) {};
+
+	float speed;
+	float theta;
+	float xSpeed;
+	float ySpeed;
+
+};
+
 class Game
 {
 	public:
 		Game();
 
 		GameStates GetGameState() { return gameState; };
+		void startGame();
 
 		sf::RenderWindow window;
 		sf::Clock clock;
 
 		// Paddles:
-		sf::RectangleShape playerPaddle;
-		sf::RectangleShape compPaddle;
+		Paddle playerPaddle;
+		Paddle compPaddle;
 
 		// Ball:
-		sf::CircleShape ball;
+		Ball ball;
 
 	private:
 		// states:

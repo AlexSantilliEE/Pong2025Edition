@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <random>
 #include <SFML/Graphics.hpp>
 #include "Game.h"
 
@@ -27,6 +28,21 @@ Game::Game()
 	
 	this->ball.setRadius( 10.0f );
 	this->ball.setPosition( sf::Vector2f( ( this->screenSizeX / 2 ), ( this->screenSizeY / 2 ) ) );
+
+	this->gameState = GAME_START;
+
+	return;
+}
+
+void Game::startGame() 
+{
+	this->gameState = GAME_RUNNING;
+	
+	// Give the ball a random direction:
+	srand( time(0) );
+	this->ball.theta = rand() % 360;
+	this->ball.xSpeed = this->ball.speed * cosf( this->ball.theta );
+	this->ball.ySpeed = this->ball.speed * sinf( this->ball.theta );
 
 	return;
 }
